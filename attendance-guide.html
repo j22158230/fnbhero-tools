@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>근태·급여 관리 사용설명서 (실습)</title>
+<style>
+  :root{--navy:#1f3864;--navy2:#2a4a7f;--gold:#b8860b;--red:#c0392b;--green:#1f7a44;--teal:#0f766e;
+        --ink:#222;--mut:#6b7280;--line:#e3e7ee;--bg:#f4f6f9;--card:#fff;}
+  *{box-sizing:border-box;-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--bg);color:var(--ink);
+       font-family:'Malgun Gothic','맑은 고딕',-apple-system,sans-serif;line-height:1.65;}
+  .wrap{max-width:820px;margin:0 auto;padding:0 16px 60px;}
+  .top{background:linear-gradient(135deg,#0f766e,#1f3864);color:#fff;padding:26px 20px 22px;text-align:center;}
+  .top h1{margin:0 0 6px;font-size:23px;font-weight:800;}
+  .top p{margin:0;font-size:14px;opacity:.9;}
+  .badge{display:inline-block;background:rgba(255,255,255,.16);border-radius:20px;padding:4px 13px;font-size:12.5px;margin-top:12px;font-weight:700;}
+  .prog{position:sticky;top:0;z-index:9;background:var(--card);border-bottom:1px solid var(--line);
+        padding:11px 16px;display:flex;align-items:center;gap:12px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .prog .bar{flex:1;height:11px;background:#e9edf3;border-radius:10px;overflow:hidden;}
+  .prog .fill{height:100%;width:0;background:linear-gradient(90deg,var(--teal),#2dd4bf);border-radius:10px;transition:width .3s;}
+  .prog b{font-size:13px;color:var(--navy);white-space:nowrap;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px;margin-top:18px;box-shadow:0 2px 10px rgba(0,0,0,.03);}
+  .lead{display:flex;gap:14px;align-items:flex-start;}
+  .lead .ico{font-size:34px;line-height:1;}
+  .lead h2{margin:0 0 4px;font-size:18px;color:var(--navy);}
+  .lead p{margin:0;font-size:14.5px;color:#444;}
+  .roles{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px;}
+  .role{flex:1;min-width:220px;border:1.5px solid var(--line);border-radius:12px;padding:14px;background:#fbfdfd;}
+  .role h4{margin:0 0 4px;font-size:14.5px;color:var(--teal);}
+  .role p{margin:0;font-size:13px;color:#444;}
+  h2.sec{font-size:17px;color:var(--navy);margin:26px 4px 6px;display:flex;align-items:center;gap:8px;}
+  h2.sec .n{background:var(--teal);color:#fff;width:26px;height:26px;border-radius:50%;
+            display:inline-flex;align-items:center;justify-content:center;font-size:14px;}
+  .who{display:inline-block;font-size:11.5px;font-weight:800;border-radius:6px;padding:2px 8px;margin-left:6px;vertical-align:middle;}
+  .who.emp{background:#e6f7f3;color:var(--teal);} .who.adm{background:#eef1f6;color:var(--navy);}
+  .step{display:flex;gap:14px;padding:16px 4px;border-top:1px dashed var(--line);}
+  .step:first-child{border-top:none;}
+  .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--teal);color:#fff;
+             font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
+  .step .txt{flex:1;}
+  .step h3{margin:2px 0 4px;font-size:15.5px;}
+  .step p{margin:0;font-size:14px;color:#444;}
+  .btns{display:flex;gap:10px;margin-top:10px;}
+  .bin{background:var(--green);color:#fff;border-radius:9px;padding:12px 22px;font-size:15px;font-weight:800;text-align:center;}
+  .bout{background:var(--red);color:#fff;border-radius:9px;padding:12px 22px;font-size:15px;font-weight:800;text-align:center;}
+  .mock{margin-top:10px;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px;}
+  .mock .mh{background:#eef1f6;padding:6px 10px;font-weight:700;color:var(--navy);font-size:12px;}
+  .mock table{width:100%;border-collapse:collapse;}
+  .mock td,.mock th{border:1px solid var(--line);padding:5px 7px;text-align:center;}
+  .mock th{background:#f7f9fc;color:var(--mut);font-weight:700;}
+  .mock td.l,.mock th.l{text-align:left;}
+  .mock .auto{color:var(--green);font-weight:800;background:#f0f9f4;}
+  .mock .bad{color:var(--red);font-weight:700;}
+  .chk{display:flex;align-items:center;gap:9px;margin-top:12px;cursor:pointer;user-select:none;
+       background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:9px 12px;}
+  .chk input{width:19px;height:19px;accent-color:var(--teal);cursor:pointer;flex:none;}
+  .chk span{font-size:13.5px;font-weight:700;color:var(--navy);}
+  .chk.done{background:#e6f7f3;border-color:#a9e5d9;}
+  .chk.done span{color:var(--teal);}
+  .tip{background:#fff9ec;border:1px solid #f0dfae;border-radius:10px;padding:12px 14px;margin-top:12px;font-size:13.5px;color:#6a5210;}
+  .tip b{color:var(--gold);}
+  .warn{background:#fdecec;border:1px solid #f3c2c2;color:#8a2b22;}
+  .warn b{color:var(--red);}
+  .play{background:linear-gradient(135deg,#fbfefe,#eefaf7);border:1.5px solid #c7ece4;}
+  .play .row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;}
+  .fld{display:flex;flex-direction:column;gap:4px;}
+  .fld label{font-size:12.5px;color:var(--mut);font-weight:700;}
+  .fld .ig{display:flex;align-items:center;background:#fff;border:1.5px solid #cfd6e2;border-radius:8px;padding:0 8px;}
+  .fld input{width:96px;border:none;outline:none;font-size:15px;font-weight:700;padding:8px 2px;text-align:right;font-family:inherit;background:transparent;color:var(--ink);}
+  .fld .u{font-size:12px;color:var(--mut);padding-left:3px;}
+  .out{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;}
+  .kpi{flex:1;min-width:120px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;text-align:center;}
+  .kpi .k{font-size:12px;color:var(--mut);font-weight:700;}
+  .kpi .v{font-size:20px;font-weight:800;color:var(--navy);margin-top:3px;}
+  .kpi.good .v{color:var(--green);}
+  .quiz{margin-top:14px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px;}
+  .quiz p{margin:0 0 8px;font-size:14px;font-weight:700;}
+  .quiz .opt{display:block;width:100%;text-align:left;background:#f7f9fc;border:1.5px solid var(--line);
+             border-radius:8px;padding:10px 12px;margin-top:7px;font-size:14px;cursor:pointer;font-family:inherit;}
+  .quiz .opt:hover{border-color:var(--navy);}
+  .quiz .opt.ok{background:#eafaf1;border-color:var(--green);color:var(--green);font-weight:800;}
+  .quiz .opt.no{background:#fdecec;border-color:var(--red);color:var(--red);}
+  .quiz .fb{margin-top:9px;font-size:13.5px;font-weight:700;min-height:18px;}
+  .done-all{display:none;background:linear-gradient(135deg,#eafaf1,#f7fff9);border:1.5px solid #bfe6cf;text-align:center;padding:22px;}
+  .done-all h2{color:var(--green);margin:0 0 6px;}
+  .foot{text-align:center;color:var(--mut);font-size:12px;margin-top:26px;}
+  .print{background:var(--navy);color:#fff;border:none;border-radius:9px;padding:10px 16px;font-size:13.5px;font-weight:700;cursor:pointer;font-family:inherit;margin-top:8px;}
+  @media print{.prog,.print{display:none;}}
+</style>
+</head>
+<body>
+<div class="top">
+  <h1>🕘 근태·급여 관리 사용설명서</h1>
+  <p>출근·퇴근을 누르면 근무시간과 급여가 저절로 정리돼요</p>
+  <div class="badge">👀 읽고 → ✍️ 따라하고 → ✅ 체크하세요</div>
+</div>
+
+<div class="prog">
+  <b>진행</b>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <b id="pcnt">0 / 5</b>
+</div>
+
+<div class="wrap">
+
+  <div class="card lead">
+    <div class="ico">🤔</div>
+    <div>
+      <h2>이 도구는 뭐예요?</h2>
+      <p>직원이 <b>출근·퇴근 버튼</b>만 누르면, 누가 며칠·몇 시간 일했는지, 지각·조퇴는 없었는지가 <b>저절로</b> 정리돼요.
+      관리자는 그걸로 <b>월급</b>을 쉽게 계산해요.</p>
+      <div class="roles">
+        <div class="role"><h4>👤 직원(알바)이 하는 일</h4><p>코드로 들어가서 <b>출근</b> · <b>퇴근</b> 누르기. 끝!</p></div>
+        <div class="role"><h4>👔 관리자가 하는 일</h4><p>현황·월급 확인, 직원 등록(인사기록카드), 백업.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip"><b>💡 먼저!</b> 받은 <b>근태·급여.html</b> 파일을 <b>두 번 클릭</b>하면 인터넷 창에서 열려요. 설치는 필요 없어요.</div>
+
+  <h2 class="sec"><span class="n">1</span> 내 코드로 들어가요 <span class="who emp">직원·관리자</span></h2>
+  <div class="card">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="txt">
+        <h3>코드를 넣고 「확인」</h3>
+        <p>화면에 나오는 칸에 <b>내 코드</b>를 넣어요. 직원은 <b>직원코드</b>(예: <b>E001</b>), 관리자는 <b>관리자코드</b>를 넣어요.
+        코드는 <b>관리자에게 받으세요.</b></p>
+      </div>
+    </div>
+    <div class="tip"><b>💡</b> 직원 코드로 들어가면 <b>출근·퇴근 화면</b>만 보여요. 관리자 코드로 들어가면 <b>급여·직원관리</b>까지 보여요.</div>
+    <label class="chk" data-k="a1"><input type="checkbox"><span>✅ 코드로 들어가는 방법을 알겠어요</span></label>
+  </div>
+
+  <h2 class="sec"><span class="n">2</span> 출근·퇴근을 눌러요 <span class="who emp">직원</span></h2>
+  <div class="card">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="txt">
+        <h3>일 시작하면 「출근」, 끝나면 「퇴근」</h3>
+        <p>딱 두 개만 누르면 돼요. 시간은 <b>자동으로</b> 기록돼요. 손으로 시간을 적을 필요 없어요.</p>
+        <div class="btns"><div class="bin">🟢 출근</div><div class="bout">🔴 퇴근</div></div>
+      </div>
+    </div>
+    <div class="tip warn"><b>⚠️ 잊지 마세요!</b> 퇴근할 때 <b>퇴근</b>을 안 누르면 근무시간이 이상하게 남아요. 갈 때 꼭 눌러요.</div>
+    <label class="chk" data-k="a2"><input type="checkbox"><span>✅ 출근/퇴근 버튼을 눌러봤어요</span></label>
+  </div>
+
+  <h2 class="sec"><span class="n">3</span> 현황·월급을 봐요 <span class="who adm">관리자</span></h2>
+  <div class="card">
+    <p style="margin:0 0 4px;font-size:14.5px;">위쪽 칸에서 <b>「현황」</b>은 오늘 근무, <b>「월별 급여」</b>는 한 달 급여예요.
+    <b>지각·조퇴·결근은 저절로 표시</b>돼요.</p>
+    <div class="mock" style="margin-top:12px;">
+      <div class="mh">월별 급여 집계 (예시)</div>
+      <table>
+        <tr><th class="l">직원</th><th>근무일</th><th>근무시간</th><th>지각</th><th>조퇴</th><th>지급 합계</th></tr>
+        <tr><td class="l">홍길동</td><td>22</td><td>176h</td><td class="bad">1</td><td>0</td><td class="auto">1,936,000원</td></tr>
+      </table>
+    </div>
+    <div class="tip"><b>💡</b> <b>수당(+)</b>은 더 주는 돈, <b>공제(−)</b>는 빼는 돈. 관리자가 직접 넣을 수 있어요.</div>
+    <label class="chk" data-k="a3"><input type="checkbox"><span>✅ 월별 급여 표를 찾았어요</span></label>
+  </div>
+
+  <h2 class="sec"><span class="n">4</span> 직원 등록 · 백업해요 <span class="who adm">관리자</span></h2>
+  <div class="card">
+    <div class="step">
+      <div class="num">1</div>
+      <div class="txt"><h3>「＋ 인사기록카드 작성」으로 직원 등록</h3>
+      <p><b>직원 관리</b> 칸에서 새 직원의 이름·매장·급여형태(시급/월급)를 넣고 저장해요. 코드는 비우면 <b>자동</b>으로 만들어져요.</p></div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="txt"><h3>⬇ 백업 내보내기 (매주 권장)</h3>
+      <p><b>백업·설정</b> 칸에서 <b>⬇ 백업 내보내기</b>를 누르면 파일로 저장돼요. 직원·근태 <b>CSV</b>는 엑셀로 볼 수 있어요.</p></div>
+    </div>
+    <div class="tip warn"><b>⚠️ 중요!</b> 이 자료는 <b>지금 쓰는 브라우저에만</b> 저장돼요. 컴퓨터를 바꾸면 사라질 수 있으니 <b>매주 한 번 ⬇ 백업</b> 꼭 하세요.</div>
+    <label class="chk" data-k="a4"><input type="checkbox"><span>✅ 직원 등록·백업 위치를 확인했어요</span></label>
+  </div>
+
+  <h2 class="sec"><span class="n">5</span> 미니 연습 (직접 해봐요!)</h2>
+  <div class="card play">
+    <p style="margin:0 0 12px;font-size:14.5px;"><b>급여가 어떻게 나오는지</b> 숫자를 바꿔보세요. (쉬운 시급 계산 버전)</p>
+    <div class="row">
+      <div class="fld"><label>시급</label><div class="ig"><input id="a-wage" inputmode="numeric" value="10030"><span class="u">원</span></div></div>
+      <div class="fld"><label>하루 근무시간</label><div class="ig"><input id="a-hours" inputmode="decimal" value="8"><span class="u">시간</span></div></div>
+      <div class="fld"><label>한 달 근무일</label><div class="ig"><input id="a-days" inputmode="numeric" value="22"><span class="u">일</span></div></div>
+    </div>
+    <div class="out">
+      <div class="kpi"><div class="k">하루 급여</div><div class="v" id="o-day">–</div></div>
+      <div class="kpi"><div class="k">한 달 근무시간</div><div class="v" id="o-hh">–</div></div>
+      <div class="kpi good"><div class="k">한 달 급여</div><div class="v" id="o-pay">–</div></div>
+    </div>
+    <div class="tip" id="a-msg" style="margin-top:14px;">숫자를 바꿔보세요 👆</div>
+
+    <div class="quiz" id="quiz">
+      <p>🧠 퀴즈 : <b>오전 9시 출근, 오후 6시 퇴근</b>, 점심 <b>1시간</b>이면 일한 시간은?</p>
+      <button class="opt">9시간</button>
+      <button class="opt" data-ok="1">8시간</button>
+      <button class="opt">10시간</button>
+      <div class="fb" id="qfb"></div>
+    </div>
+    <label class="chk" data-k="a5" style="margin-top:14px;"><input type="checkbox"><span>✅ 미니 연습을 해봤어요</span></label>
+  </div>
+
+  <div class="card done-all" id="doneAll">
+    <h2>🎉 다 배웠어요!</h2>
+    <p style="margin:0;font-size:14.5px;">이제 진짜 <b>근태·급여.html</b>을 열어서 우리 매장 직원을 등록해 보세요.</p>
+    <button class="print" onclick="window.print()">🖨️ 이 설명서 인쇄하기</button>
+  </div>
+
+  <div class="foot">FNBHERO 교육팀 · 근태·급여 관리 실습 설명서 · 2026-08-01</div>
+</div>
+
+<script>
+  var KEYS=['a1','a2','a3','a4','a5'];
+  function loadChk(){try{return JSON.parse(localStorage.getItem('attGuideChk')||'{}');}catch(e){return {};}}
+  var st=loadChk();
+  document.querySelectorAll('.chk').forEach(function(el){
+    var k=el.dataset.k, box=el.querySelector('input');
+    box.checked=!!st[k]; el.classList.toggle('done',box.checked);
+    box.addEventListener('change',function(){
+      st[k]=box.checked; el.classList.toggle('done',box.checked);
+      localStorage.setItem('attGuideChk',JSON.stringify(st)); prog();
+    });
+  });
+  function prog(){
+    var n=KEYS.filter(function(k){return st[k];}).length;
+    document.getElementById('fill').style.width=(n/KEYS.length*100)+'%';
+    document.getElementById('pcnt').textContent=n+' / '+KEYS.length;
+    document.getElementById('doneAll').style.display=(n===KEYS.length)?'block':'none';
+  }
+  prog();
+
+  function num(id){return parseFloat((document.getElementById(id).value||'0').replace(/[^0-9.]/g,''))||0;}
+  function won(n){return Math.round(n).toLocaleString('ko-KR')+'원';}
+  function man(n){return (Math.round(n/10000)).toLocaleString('ko-KR')+'만 원';}
+  function calc(){
+    var wage=num('a-wage'),hours=num('a-hours'),days=num('a-days');
+    var day=wage*hours, hh=hours*days, pay=day*days;
+    document.getElementById('o-day').textContent=won(day);
+    document.getElementById('o-hh').textContent=hh+'시간';
+    document.getElementById('o-pay').textContent=man(pay);
+    document.getElementById('a-msg').innerHTML='👍 시급 '+won(wage)+' × '+hours+'시간 × '+days+'일 = <b>'+man(pay)+'</b> 이에요.';
+  }
+  ['a-wage','a-hours','a-days'].forEach(function(id){
+    document.getElementById(id).addEventListener('input',calc);});
+  calc();
+
+  document.querySelectorAll('#quiz .opt').forEach(function(b){
+    b.addEventListener('click',function(){
+      var fb=document.getElementById('qfb');
+      if(b.dataset.ok){b.classList.add('ok');fb.style.color='#1f7a44';
+        fb.textContent='정답! 9시간 있었지만 점심 1시간을 빼서 8시간이에요 🎉';}
+      else{b.classList.add('no');fb.style.color='#c0392b';
+        fb.textContent='아쉬워요. 9시~18시는 9시간, 점심 1시간을 빼면 8시간이에요.';}
+    });
+  });
+</script>
+</body>
+</html>
