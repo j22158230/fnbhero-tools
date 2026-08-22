@@ -31,21 +31,31 @@
   .lead p{margin:0;font-size:14.5px;color:#444;}
   h2.sec{font-size:17px;color:var(--navy);margin:26px 4px 6px;display:flex;align-items:center;gap:8px;}
   h2.sec .n{background:var(--navy);color:#fff;width:26px;height:26px;border-radius:50%;
-            display:inline-flex;align-items:center;justify-content:center;font-size:14px;}
+            display:inline-flex;align-items:center;justify-content:center;font-size:14px;flex:none;}
   .step{display:flex;gap:14px;padding:16px 4px;border-top:1px dashed var(--line);}
   .step:first-child{border-top:none;}
   .step .num{flex:none;width:30px;height:30px;border-radius:50%;background:var(--gold);color:#fff;
              font-weight:800;display:flex;align-items:center;justify-content:center;font-size:15px;}
-  .step .txt{flex:1;}
+  .step .txt{flex:1;min-width:0;}
   .step h3{margin:2px 0 4px;font-size:15.5px;}
   .step p{margin:0;font-size:14px;color:#444;}
   .mock{margin-top:10px;border:1.5px solid var(--line);border-radius:10px;overflow:hidden;font-size:12.5px;}
   .mock .mh{background:#eef1f6;padding:6px 10px;font-weight:700;color:var(--navy);font-size:12px;}
-  .mock table{width:100%;border-collapse:collapse;}
-  .mock td,.mock th{border:1px solid var(--line);padding:5px 7px;text-align:center;}
+  .mock .sx{overflow-x:auto;}
+  .mock table{width:100%;border-collapse:collapse;min-width:440px;}
+  .mock td,.mock th{border:1px solid var(--line);padding:5px 7px;text-align:center;white-space:nowrap;}
   .mock th{background:#f7f9fc;color:var(--mut);font-weight:700;}
   .mock td.l,.mock th.l{text-align:left;}
   .mock .auto{color:var(--green);font-weight:800;background:#f0f9f4;}
+  .mock .me{background:#fff;padding:8px 10px;display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);font-size:12.5px;}
+  .mock .me .no{width:20px;text-align:center;font-weight:800;color:var(--mut);font-size:11.5px;}
+  .mock .me .nm{flex:1;font-weight:700;color:var(--navy);}
+  .mock .me .pv{color:var(--mut);font-size:12px;}
+  .mock .ch{background:#eef1f6;padding:7px 10px;font-weight:800;color:var(--navy);font-size:12.5px;border-top:1px solid var(--line);}
+  .tg{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:11px;margin-right:3px;}
+  .tg.a{background:#eef2fa;color:var(--navy);}
+  .tg.b{background:#e6f4ec;color:var(--green);}
+  .tg.c{background:#fff3e0;color:#a8620a;}
   .chk{display:flex;align-items:center;gap:9px;margin-top:12px;cursor:pointer;user-select:none;
        background:#f8fafc;border:1px solid var(--line);border-radius:9px;padding:9px 12px;}
   .chk input{width:19px;height:19px;accent-color:var(--gold);cursor:pointer;flex:none;}
@@ -57,20 +67,24 @@
   .tip b{color:var(--gold);}
   .warn{background:#fdecec;border:1px solid #f3c2c2;color:#8a2b22;}
   .warn b{color:var(--red);}
+  .new{background:#eafaf1;border:1px solid #bfe6cf;color:#17603a;}
+  .new b{color:var(--green);}
   .play{background:linear-gradient(135deg,#fbfcfe,#f2f6fb);border:1.5px solid #d6e0ee;}
   .play .row{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:flex-end;}
   .fld{display:flex;flex-direction:column;gap:4px;}
   .fld label{font-size:12.5px;color:var(--mut);font-weight:700;}
   .fld .ig{display:flex;align-items:center;background:#fff;border:1.5px solid #cfd6e2;border-radius:8px;
            padding:0 8px;}
-  .fld input{width:110px;border:none;outline:none;font-size:15px;font-weight:700;padding:8px 2px;
+  .fld input{width:104px;border:none;outline:none;font-size:15px;font-weight:700;padding:8px 2px;
              text-align:right;font-family:inherit;background:transparent;color:var(--ink);}
+  .fld select{border:1.5px solid #cfd6e2;border-radius:8px;font-size:15px;font-weight:700;
+              padding:8px 6px;font-family:inherit;background:#fff;color:var(--ink);}
   .fld .u{font-size:12px;color:var(--mut);padding-left:3px;}
   .out{margin-top:14px;display:flex;flex-wrap:wrap;gap:10px;}
-  .kpi{flex:1;min-width:120px;background:#fff;border:1.5px solid var(--line);border-radius:10px;
+  .kpi{flex:1;min-width:108px;background:#fff;border:1.5px solid var(--line);border-radius:10px;
        padding:11px 12px;text-align:center;}
   .kpi .k{font-size:12px;color:var(--mut);font-weight:700;}
-  .kpi .v{font-size:20px;font-weight:800;color:var(--navy);margin-top:3px;}
+  .kpi .v{font-size:19px;font-weight:800;color:var(--navy);margin-top:3px;}
   .kpi.good .v{color:var(--green);} .kpi.bad .v{color:var(--red);}
   .quiz{margin-top:14px;background:#fff;border:1.5px solid var(--line);border-radius:10px;padding:14px;}
   .quiz p{margin:0 0 8px;font-size:14px;font-weight:700;}
@@ -99,7 +113,7 @@
 <div class="prog">
   <b>진행</b>
   <div class="bar"><div class="fill" id="fill"></div></div>
-  <b id="pcnt">0 / 5</b>
+  <b id="pcnt">0 / 6</b>
 </div>
 
 <div class="wrap">
@@ -110,11 +124,13 @@
       <h2>이 도구는 뭐예요?</h2>
       <p>“이 메뉴 하나 팔면 재료비가 얼마 들까?”를 <b>자동으로 계산해 주는 표</b>예요.
       우리는 <b>재료를 산 값</b>과 <b>메뉴에 얼마나 쓰는지</b>만 적으면 됩니다.
-      원가·원가율·남는 돈(마진)은 계산기가 알아서 채워줘요.</p>
+      원가·원가율·남는 돈(마진)은 계산기가 알아서 채워줘요.
+      만든 메뉴는 <b>③ 메뉴리스트</b>에서 카테고리별로 정리할 수도 있어요.</p>
     </div>
   </div>
 
-  <div class="tip"><b>💡 먼저!</b> 받은 <b>원가표.html</b> 파일을 <b>두 번 클릭</b>하면 크롬 같은 인터넷 창에서 열려요. 설치는 필요 없어요.</div>
+  <div class="tip"><b>💡 먼저!</b> 받은 <b>원가표.html</b> 파일을 <b>두 번 클릭</b>하면 크롬 같은 인터넷 창에서 열려요. 설치는 필요 없어요.
+  맨 위에 <b>① 식자재 · ② 메뉴 원가 · ③ 메뉴리스트</b> 세 칸이 있어요. <b>왼쪽부터 차례대로</b> 하면 됩니다.</div>
 
   <h2 class="sec"><span class="n">1</span> 재료(식자재)를 적어요</h2>
   <div class="card">
@@ -128,25 +144,43 @@
     <div class="step">
       <div class="num">2</div>
       <div class="txt">
-        <h3>재료 이름 · 산 값 · 산 양을 적어요</h3>
-        <p>예를 들어 <b>삼겹살</b>을 <b>20,000원</b> 주고 <b>1,000g</b> 샀다면 그대로 적어요.
-        그러면 <b>단위원가(1g에 얼마)</b>가 초록색으로 <b>저절로</b> 나와요.</p>
+        <h3>다섯 칸만 적으면 돼요</h3>
+        <p><b>식자재명 · 규격 · 단위 · 과세여부 · 금액</b> — 이 다섯 개만 적어요.
+        나머지 <b>부가세 · 총액 · 단위원가</b>는 초록색으로 <b>저절로</b> 나와요.</p>
+        <p style="margin-top:7px;">
+        · <b>규격</b> = 산 양을 <b>숫자만</b> (1,000g 샀으면 <b>1000</b>)<br>
+        · <b>단위</b> = <b>g</b>(무게·용량) / <b>ea</b>(개) / <b>pk</b>(팩) / <b>box</b>(박스) 중에서 골라요<br>
+        · <b>금액</b> = 산 값</p>
         <div class="mock">
           <div class="mh">① 식자재 마스터</div>
-          <table>
-            <tr><th class="l">식자재명</th><th>구매가</th><th>구매량</th><th>단위</th><th>단위원가</th></tr>
-            <tr><td class="l">삼겹살</td><td>20,000</td><td>1,000</td><td>g</td><td class="auto">20원/g</td></tr>
-          </table>
+          <div class="sx"><table>
+            <tr><th class="l">식자재명</th><th>규격</th><th>단위</th><th>과세여부</th><th>금액</th><th>부가세</th><th>총액</th><th>단위원가</th></tr>
+            <tr><td class="l">삼겹살</td><td>1000</td><td>g</td><td>과세</td><td>20,000</td><td class="auto">2,000</td><td class="auto">22,000</td><td class="auto">22원/g</td></tr>
+            <tr><td class="l">계란</td><td>30</td><td>ea</td><td>면세</td><td>9,000</td><td class="auto">0</td><td class="auto">9,000</td><td class="auto">300원/ea</td></tr>
+          </table></div>
         </div>
       </div>
     </div>
     <div class="step">
       <div class="num">3</div>
       <div class="txt">
-        <h3>재료가 많으면 「＋ 행 추가」</h3>
-        <p>재료를 더 넣고 싶으면 아래 <b>＋ 행 추가</b> 버튼을 눌러요. 필요 없는 줄은 <b>✕</b>로 지워요.</p>
+        <h3>과세여부는 셋 중 하나예요</h3>
+        <p>계산서를 보고 고르면 됩니다. 헷갈리면 <b>거래처 계산서에 부가세가 따로 적혀 있는지</b>만 보세요.</p>
+        <p style="margin-top:8px;">
+        <span class="tg a">과세</span> 부가세가 <b>따로</b> 붙는 재료 → 금액의 10%가 <b>더해져요</b><br>
+        <span style="display:inline-block;margin-top:6px"><span class="tg b">면세</span> 부가세가 <b>없는</b> 재료 → 0원 (손질 안 한 고기·채소·생선·계란 등)</span><br>
+        <span style="display:inline-block;margin-top:6px"><span class="tg c">포함</span> 금액에 부가세가 <b>이미 들어있는</b> 경우 → 더 붙지 않아요</span></p>
       </div>
     </div>
+    <div class="step">
+      <div class="num">4</div>
+      <div class="txt">
+        <h3>줄 추가 · 순서 바꾸기 · 지우기</h3>
+        <p>재료를 더 넣고 싶으면 아래 <b>＋ 행 추가</b>를 눌러요.
+        오른쪽 끝의 <b>▲ ▼</b>로 <b>순서를 바꾸고</b>, <b>✕</b>로 줄을 지워요.</p>
+      </div>
+    </div>
+    <div class="tip new"><b>✅ 표 맨 아래</b>에 <b>금액 합계 · 부가세 합계 · 총액 합계</b>가 나와요. 부가세 합계는 <b>과세</b> 재료만 더한 값이라, 매입세액 확인할 때 그대로 보시면 됩니다.</div>
     <label class="chk" data-k="c1"><input type="checkbox"><span>✅ 재료 한 개를 적어봤어요</span></label>
   </div>
 
@@ -164,40 +198,81 @@
       <div class="txt">
         <h3>이 메뉴에 들어가는 재료를 골라요</h3>
         <p><b>＋ 식자재 추가</b>를 누르고, 아까 적은 재료 중에서 골라 <b>사용량</b>(얼마나 쓰는지)을 적어요.
-        예: 삼겹살 <b>150g</b>. 그러면 원가 <b>3,000원</b>이 저절로 나와요.</p>
+        예: 삼겹살 <b>150g</b>. 그러면 원가 <b>3,300원</b>이 저절로 나와요.</p>
         <div class="mock">
           <div class="mh">메뉴: 삼겹살 정식 (판매가 12,000원)</div>
-          <table>
+          <div class="sx"><table>
             <tr><th class="l">식자재</th><th>사용량</th><th>단위원가</th><th>원가</th></tr>
-            <tr><td class="l">삼겹살</td><td>150 g</td><td>20원</td><td class="auto">3,000원</td></tr>
-          </table>
+            <tr><td class="l">삼겹살</td><td>150 g</td><td>22원</td><td class="auto">3,300원</td></tr>
+            <tr><td class="l">계란</td><td>1 ea</td><td>300원</td><td class="auto">300원</td></tr>
+          </table></div>
         </div>
       </div>
     </div>
+    <div class="tip"><b>💡 목록에 재료가 안 보이면?</b> <b>① 식자재</b> 탭에서 <b>식자재명을 적은 재료만</b> 목록에 나와요. 이름을 안 적었으면 먼저 적어 주세요.</div>
     <label class="chk" data-k="c2"><input type="checkbox"><span>✅ 메뉴를 하나 만들고 재료를 담아봤어요</span></label>
   </div>
 
-  <h2 class="sec"><span class="n">3</span> 자동으로 나오는 숫자를 읽어요</h2>
+  <h2 class="sec"><span class="n">3</span> 메뉴리스트로 정리해요 <span class="tg b" style="margin-left:2px">NEW</span></h2>
+  <div class="card">
+    <p style="margin:0 0 4px;font-size:14.5px;">②에서 만든 메뉴가 <b>③ 메뉴리스트</b>에 <b>저절로</b> 올라와요. 카테고리를 만들어 차림표처럼 정리하면 됩니다.</p>
+    <div class="step">
+      <div class="num">1</div>
+      <div class="txt">
+        <h3>카테고리를 만들어요</h3>
+        <p>맨 위 칸에 <b>식사류</b>, <b>안주류</b> 처럼 적고 <b>＋ 카테고리 추가</b>를 눌러요.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">2</div>
+      <div class="txt">
+        <h3>원하는 자리에 넣어요</h3>
+        <p><b>미분류 메뉴</b>에 있는 메뉴 옆에서 <b>카테고리</b>와 <b>넣을 위치</b>를 고르고 <b>＋ 등록</b>을 눌러요.
+        위치는 <b>「1번 앞에」「2번 앞에」… 「맨 뒤에」</b> 중에서 고를 수 있어요.</p>
+        <div class="mock">
+          <div class="ch">식사류 &nbsp;<span style="font-weight:600;color:var(--mut);font-size:11.5px">2개</span></div>
+          <div class="me"><span class="no">1</span><span class="nm">삼겹살 정식</span><span class="pv">12,000원 · 원가 3,600원 · 30%</span></div>
+          <div class="me"><span class="no">2</span><span class="nm">삼겹살 덮밥</span><span class="pv">11,000원 · 원가 3,300원 · 30%</span></div>
+          <div class="ch">안주류 &nbsp;<span style="font-weight:600;color:var(--mut);font-size:11.5px">1개</span></div>
+          <div class="me"><span class="no">1</span><span class="nm">계란말이</span><span class="pv">6,000원 · 원가 900원 · 15%</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="txt">
+        <h3>순서 바꾸기 · 빼기</h3>
+        <p>· 순서는 <b>▲ ▼</b> 버튼으로 바꿔요. <b>줄을 마우스로 끌어서</b> 옮겨도 돼요.<br>
+        · 옆의 <b>드롭다운</b>에서 다른 카테고리를 고르면 그쪽으로 옮겨져요.<br>
+        · <b>✕</b>를 누르면 카테고리에서 빠져 <b>미분류로 돌아가요</b>. (메뉴가 지워지는 게 아니에요)</p>
+      </div>
+    </div>
+    <div class="tip"><b>💡 메뉴 이름을 바꾸면?</b> ②에서 이름이나 판매가를 고치면 메뉴리스트에도 <b>바로 반영</b>돼요. ②에서 메뉴를 지우면 리스트에서도 <b>자동으로 빠져요</b>.</div>
+    <label class="chk" data-k="c3"><input type="checkbox"><span>✅ 카테고리를 만들고 메뉴를 넣어봤어요</span></label>
+  </div>
+
+  <h2 class="sec"><span class="n">4</span> 자동으로 나오는 숫자를 읽어요</h2>
   <div class="card">
     <p style="margin:0 0 4px;font-size:14.5px;">아래 4가지는 <b>우리가 계산 안 해도</b> 저절로 나와요. 뜻만 알면 돼요.</p>
     <div class="mock" style="margin-top:12px;">
       <div class="mh">메뉴 원가 요약</div>
-      <table>
+      <div class="sx"><table>
         <tr><th class="l">메뉴</th><th>판매가</th><th>원가</th><th>원가율</th><th>마진액</th><th>마진율</th></tr>
-        <tr><td class="l">삼겹살 정식</td><td>12,000</td><td class="auto">3,000</td><td class="auto">25%</td><td class="auto">9,000</td><td class="auto">75%</td></tr>
-      </table>
+        <tr><td class="l">삼겹살 정식</td><td>12,000</td><td class="auto">3,600</td><td class="auto">30%</td><td class="auto">8,400</td><td class="auto">70%</td></tr>
+      </table></div>
     </div>
     <div class="tip" style="margin-top:14px;">
       <b>쉽게 말하면</b><br>
-      • <b>원가</b> = 재료비 (3,000원)<br>
-      • <b>원가율</b> = 파는 값 중 재료비 비율 (25% → 100원 팔면 25원이 재료)<br>
-      • <b>마진액</b> = 남는 돈 (9,000원, 단 임대료·인건비는 빠지기 전)<br>
+      • <b>원가</b> = 재료비 (3,600원) — <b>부가세까지 더한 값</b>으로 계산돼요<br>
+      • <b>원가율</b> = 파는 값 중 재료비 비율 (30% → 100원 팔면 30원이 재료)<br>
+      • <b>마진액</b> = 남는 돈 (8,400원, 단 임대료·인건비는 빠지기 전)<br>
       • <b>원가율은 보통 30~35%</b>면 괜찮아요. 숫자가 크면 재료비가 많이 드는 메뉴예요.
     </div>
-    <label class="chk" data-k="c3"><input type="checkbox"><span>✅ 원가율·마진이 무슨 뜻인지 알겠어요</span></label>
+    <div class="tip warn"><b>⚠️ 원가율이 40%를 넘으면</b> 숫자가 <b>빨간색</b>으로 바뀌어요. 파는 값을 올리거나 재료 양을 줄여야 한다는 뜻이에요.</div>
+    <label class="chk" data-k="c4"><input type="checkbox"><span>✅ 원가율·마진이 무슨 뜻인지 알겠어요</span></label>
   </div>
 
-  <h2 class="sec"><span class="n">4</span> 꼭! 저장하고 백업해요</h2>
+  <h2 class="sec"><span class="n">5</span> 꼭! 저장하고 백업해요</h2>
   <div class="card">
     <div class="step">
       <div class="num">1</div>
@@ -206,22 +281,33 @@
     <div class="step">
       <div class="num">2</div>
       <div class="txt"><h3>⬇ 백업 · CSV · 🖨️ 인쇄</h3>
-      <p><b>⬇ 백업</b>은 파일로 저장(다른 컴퓨터로 옮길 때), <b>CSV</b>는 엑셀로 열기, <b>🖨️ 인쇄</b>는 종이로 뽑기예요.</p></div>
+      <p><b>⬇ 백업</b>은 파일로 저장(다른 컴퓨터로 옮길 때), <b>CSV</b>는 엑셀로 열기, <b>🖨️ 인쇄</b>는 종이·PDF로 뽑기예요.
+      셋 다 <b>식자재 · 메뉴 · 메뉴리스트</b>가 함께 들어가요.</p></div>
+    </div>
+    <div class="step">
+      <div class="num">3</div>
+      <div class="txt"><h3>🖨️ 인쇄는 보고 있는 칸이 나와요</h3>
+      <p>· <b>① 식자재</b>에서 인쇄 → <b>이름을 적은 재료만</b> 나와요 (빈 줄은 안 나옴)<br>
+      · <b>③ 메뉴리스트</b>에서 인쇄 → <b>카테고리와 메뉴만</b> 깔끔하게 나와요 (버튼·안내문은 안 나옴)</p></div>
     </div>
     <div class="tip warn"><b>⚠️ 조심!</b> 이 표는 <b>지금 쓰는 브라우저에만</b> 저장돼요. 컴퓨터를 바꾸거나 청소하면 사라질 수 있으니 <b>일주일에 한 번 ⬇ 백업</b>하세요.</div>
-    <label class="chk" data-k="c4"><input type="checkbox"><span>✅ 저장/백업 버튼 위치를 확인했어요</span></label>
+    <label class="chk" data-k="c5"><input type="checkbox"><span>✅ 저장/백업 버튼 위치를 확인했어요</span></label>
   </div>
 
-  <h2 class="sec"><span class="n">5</span> 미니 연습 (직접 해봐요!)</h2>
+  <h2 class="sec"><span class="n">6</span> 미니 연습 (직접 해봐요!)</h2>
   <div class="card play">
     <p style="margin:0 0 12px;font-size:14.5px;"><b>진짜 도구처럼</b> 숫자를 바꿔보세요. 원가가 어떻게 변하는지 바로 보여요.</p>
     <div class="row">
-      <div class="fld"><label>① 재료 산 값</label><div class="ig"><input id="p-buy" inputmode="numeric" value="20000"><span class="u">원</span></div></div>
-      <div class="fld"><label>② 재료 산 양</label><div class="ig"><input id="p-qty" inputmode="numeric" value="1000"><span class="u">g</span></div></div>
-      <div class="fld"><label>③ 메뉴에 쓰는 양</label><div class="ig"><input id="p-use" inputmode="numeric" value="150"><span class="u">g</span></div></div>
-      <div class="fld"><label>④ 파는 값(판매가)</label><div class="ig"><input id="p-sell" inputmode="numeric" value="12000"><span class="u">원</span></div></div>
+      <div class="fld"><label>① 금액 (산 값)</label><div class="ig"><input id="p-amt" inputmode="numeric" value="20000"><span class="u">원</span></div></div>
+      <div class="fld"><label>② 규격 (산 양)</label><div class="ig"><input id="p-spec" inputmode="numeric" value="1000"><span class="u">g</span></div></div>
+      <div class="fld"><label>③ 과세여부</label>
+        <select id="p-tax"><option>과세</option><option>면세</option><option>포함</option></select></div>
+      <div class="fld"><label>④ 메뉴에 쓰는 양</label><div class="ig"><input id="p-use" inputmode="numeric" value="150"><span class="u">g</span></div></div>
+      <div class="fld"><label>⑤ 파는 값(판매가)</label><div class="ig"><input id="p-sell" inputmode="numeric" value="12000"><span class="u">원</span></div></div>
     </div>
     <div class="out">
+      <div class="kpi"><div class="k">부가세</div><div class="v" id="o-vat">–</div></div>
+      <div class="kpi"><div class="k">총액</div><div class="v" id="o-tot">–</div></div>
       <div class="kpi"><div class="k">단위원가 (1g)</div><div class="v" id="o-unit">–</div></div>
       <div class="kpi"><div class="k">이 메뉴 원가</div><div class="v" id="o-cost">–</div></div>
       <div class="kpi" id="k-rate"><div class="k">원가율</div><div class="v" id="o-rate">–</div></div>
@@ -229,14 +315,23 @@
     </div>
     <div class="tip" id="p-msg" style="margin-top:14px;">숫자를 바꿔보세요 👆</div>
 
-    <div class="quiz" id="quiz">
-      <p>🧠 퀴즈 : 재료를 <b>10,000원에 500g</b> 샀어요. <b>1g은 얼마</b>일까요?</p>
-      <button class="opt" data-ok="1">20원</button>
-      <button class="opt">50원</button>
-      <button class="opt">2원</button>
-      <div class="fb" id="qfb"></div>
+    <div class="quiz" id="q1">
+      <p>🧠 퀴즈 1 : <b>과세</b> 재료를 <b>10,000원</b>에 샀어요. 원가 계산에 쓰이는 <b>총액</b>은 얼마일까요?</p>
+      <button class="opt">10,000원</button>
+      <button class="opt" data-ok="1">11,000원</button>
+      <button class="opt">9,000원</button>
+      <div class="fb" id="f1"></div>
     </div>
-    <label class="chk" data-k="c5" style="margin-top:14px;"><input type="checkbox"><span>✅ 미니 연습을 해봤어요</span></label>
+
+    <div class="quiz" id="q2">
+      <p>🧠 퀴즈 2 : <b>면세</b> 계란을 <b>9,000원에 30ea</b> 샀어요. <b>1ea는 얼마</b>일까요?</p>
+      <button class="opt">30원</button>
+      <button class="opt">3,000원</button>
+      <button class="opt" data-ok="1">300원</button>
+      <div class="fb" id="f2"></div>
+    </div>
+
+    <label class="chk" data-k="c6" style="margin-top:14px;"><input type="checkbox"><span>✅ 미니 연습을 해봤어요</span></label>
   </div>
 
   <div class="card done-all" id="doneAll">
@@ -245,11 +340,11 @@
     <button class="print" onclick="window.print()">🖨️ 이 설명서 인쇄하기</button>
   </div>
 
-  <div class="foot">FNBHERO 교육팀 · 원가표 실습 설명서 · 2026-08-01</div>
+  <div class="foot">FNBHERO 교육팀 · 원가표 실습 설명서 · 2026-08-22</div>
 </div>
 
 <script>
-  var KEYS=['c1','c2','c3','c4','c5'];
+  var KEYS=['c1','c2','c3','c4','c5','c6'];
   function loadChk(){try{return JSON.parse(localStorage.getItem('costGuideChk')||'{}');}catch(e){return {};}}
   var st=loadChk();
   document.querySelectorAll('.chk').forEach(function(el){
@@ -257,7 +352,8 @@
     box.checked=!!st[k]; el.classList.toggle('done',box.checked);
     box.addEventListener('change',function(){
       st[k]=box.checked; el.classList.toggle('done',box.checked);
-      localStorage.setItem('costGuideChk',JSON.stringify(st)); prog();
+      try{localStorage.setItem('costGuideChk',JSON.stringify(st));}catch(e){}
+      prog();
     });
   });
   function prog(){
@@ -271,33 +367,43 @@
   function num(id){return parseFloat((document.getElementById(id).value||'0').replace(/[^0-9.]/g,''))||0;}
   function won(n){return Math.round(n).toLocaleString('ko-KR')+'원';}
   function calc(){
-    var buy=num('p-buy'),qty=num('p-qty'),use=num('p-use'),sell=num('p-sell');
-    var unit=qty>0?buy/qty:0, cost=unit*use, rate=sell>0?cost/sell*100:0, margin=sell-cost;
-    document.getElementById('o-unit').textContent=qty>0?won(unit)+'/g':'–';
+    var amt=num('p-amt'),spec=num('p-spec'),use=num('p-use'),sell=num('p-sell');
+    var tax=document.getElementById('p-tax').value;
+    var vat=(tax==='과세')?Math.round(amt*0.1):0;
+    var tot=amt+vat;
+    var unit=spec>0?tot/spec:0, cost=unit*use, rate=sell>0?cost/sell*100:0, margin=sell-cost;
+    document.getElementById('o-vat').textContent=won(vat);
+    document.getElementById('o-tot').textContent=won(tot);
+    document.getElementById('o-unit').textContent=spec>0?(Math.round(unit*100)/100).toLocaleString('ko-KR')+'원/g':'–';
     document.getElementById('o-cost').textContent=won(cost);
     document.getElementById('o-rate').textContent=sell>0?rate.toFixed(0)+'%':'–';
     document.getElementById('o-margin').textContent=won(margin);
     var kr=document.getElementById('k-rate');
-    kr.className='kpi'+(rate>0&&rate<=35?' good':rate>50?' bad':'');
+    kr.className='kpi'+(rate>0&&rate<=35?' good':rate>40?' bad':'');
     var msg=document.getElementById('p-msg');
     if(sell<=0){msg.className='tip';msg.innerHTML='파는 값을 넣어보세요 👆';}
     else if(rate<=35){msg.className='tip';msg.innerHTML='👍 원가율 '+rate.toFixed(0)+'% — 좋아요! 재료비가 알맞아요.';}
-    else if(rate<=50){msg.className='tip';msg.innerHTML='🙂 원가율 '+rate.toFixed(0)+'% — 조금 높은 편이에요.';}
+    else if(rate<=40){msg.className='tip';msg.innerHTML='🙂 원가율 '+rate.toFixed(0)+'% — 조금 높은 편이에요.';}
     else{msg.className='tip warn';msg.innerHTML='⚠️ 원가율 '+rate.toFixed(0)+'% — 재료비가 너무 많아요. 파는 값을 올리거나 재료를 줄여요.';}
   }
-  ['p-buy','p-qty','p-use','p-sell'].forEach(function(id){
+  ['p-amt','p-spec','p-use','p-sell'].forEach(function(id){
     document.getElementById(id).addEventListener('input',calc);});
+  document.getElementById('p-tax').addEventListener('change',calc);
   calc();
 
-  document.querySelectorAll('#quiz .opt').forEach(function(b){
-    b.addEventListener('click',function(){
-      var fb=document.getElementById('qfb');
-      if(b.dataset.ok){b.classList.add('ok');fb.style.color='#1f7a44';
-        fb.textContent='정답! 10,000 ÷ 500 = 20원 이에요 🎉';}
-      else{b.classList.add('no');fb.style.color='#c0392b';
-        fb.textContent='아쉬워요. 산 값 ÷ 산 양 = 10,000 ÷ 500 = 20원 이에요.';}
+  function quiz(boxId,fbId,okMsg,noMsg){
+    document.querySelectorAll('#'+boxId+' .opt').forEach(function(b){
+      b.addEventListener('click',function(){
+        var fb=document.getElementById(fbId);
+        if(b.dataset.ok){b.classList.add('ok');fb.style.color='#1f7a44';fb.textContent=okMsg;}
+        else{b.classList.add('no');fb.style.color='#c0392b';fb.textContent=noMsg;}
+      });
     });
-  });
+  }
+  quiz('q1','f1','정답! 과세는 10,000 + 부가세 1,000 = 11,000원 이에요 🎉',
+              '아쉬워요. 과세는 금액의 10%가 더해져요. 10,000 + 1,000 = 11,000원 이에요.');
+  quiz('q2','f2','정답! 9,000 ÷ 30 = 300원 이에요 🎉',
+              '아쉬워요. 총액 ÷ 규격 = 9,000 ÷ 30 = 300원 이에요. (면세라 부가세는 0원)');
 </script>
 </body>
 </html>
